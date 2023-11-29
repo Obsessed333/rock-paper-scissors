@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+
+function getComputerChoice(){
+
+    let choice = ['rock', 'paper', 'scissors'];
+
+    return choice[Math.floor(Math.random() * choice.length)];
+
+
+}
+
+
+function getPlayerChoice(){
+
+  let choice = ['rock', 'paper', 'scissors'];
+   let answer = prompt('Enter rock, paper of scissors', '');
+
+    answer = answer.toLowerCase();
+
+   if(answer == 'rock' || answer == 'paper' || answer =='scissors'){
+
+   return answer;
+
+   }
+
+   
+
+}
+
+const computerSelection = getComputerChoice();
+const playerSelection = getPlayerChoice();
+
+
+function rockpaperscissors(computerSelection, playerSelection){
+let answer;
+
+if (playerSelection == 'scissors' && computerSelection == 'rock'){
+  answer =  console.log('You lose, rock beats scissors');
+} else if(playerSelection == 'rock' && computerSelection =='scissors'){
+ answer =  console.log('You win, rock beats scissors');
+} else if(playerSelection == 'paper' && computerSelection =='rock'){
+    answer = console.log('You win, paper beats rock');
+} else if(playerSelection == 'rock' && computerSelection =='paper'){
+    answer =  console.log('You lose, paper beats rock');
+} else if(playerSelection == 'scissors' && computerSelection =='paper'){
+    answer =  console.log('You win, scissors beats paper');
+} else if(playerSelection == 'paper' && computerSelection =='scissors'){
+    answer =  console.log('You lose, scissors beats paper');
+} else if((playerSelection == 'scissors' && computerSelection =='scissors') || (playerSelection == 'rock' && computerSelection =='rock') || (playerSelection == 'paper' && computerSelection =='paper')){
+    answer =   console.log('Its a tie');
+}
+
+return answer;
+}
+
+rockpaperscissors();
+    </script>
+
+</body>
+</html>
