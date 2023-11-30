@@ -49,7 +49,7 @@ function determinedWinner(computerSelection, playerSelection){
 
    //initializing result variable to store who won
     let result;
-//writing an if then else containing every possible outcome and trying to return the value(getting it wrong)
+//writing an if then else containing every possible outcome and RETURNING THE VALUE
 if (playerSelection == 'scissors' && computerSelection == 'rock'){
   result =  'You lose, rock beats scissors';
 } else if(playerSelection == 'rock' && computerSelection =='scissors'){
@@ -71,7 +71,7 @@ return result;
 
 
 //storing the winner into a variable
-const winner = determinedWinner(playerSelection,computerSelection);
+const winner = determinedWinner(computerSelection,playerSelection);
 //logging it into the console
 console.log(winner);
     </script>
