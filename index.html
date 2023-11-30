@@ -24,7 +24,7 @@ let choice = ['rock', 'paper', 'scissors'];
  let answer = prompt('Type rock, paper of scissors here')
 //making it case-insensitive
 answer = answer.toLowerCase();
-//returning answer if the word typed is one of the three choices, else return
+//returning answer if the word typed is one of the three choices, else log an error and return to the function
 if (answer == 'rock'  || answer == 'paper' || answer == 'scissors'){
 
     return answer;
@@ -38,7 +38,7 @@ if (answer == 'rock'  || answer == 'paper' || answer == 'scissors'){
 
 
 
-//playRound function that will tell you if you won or lose
+//playRound function that will tell you if you won or lost
 function playRound(){
 //initializing computer selection variable to store the computers choice
 const computerSelection = getComputerChoice();
