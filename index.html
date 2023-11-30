@@ -15,65 +15,95 @@ function getComputerChoice(){
     let choice = ['rock', 'paper', 'scissors'];
 // returning a random index from the array
     return choice[Math.floor(Math.random() * choice.length)];
-
-
 }
-
 //getting the player choice
 function getPlayerChoice(){
 //initializing choice array
-  let choice = ['rock', 'paper', 'scissors'];
-  // asking the player to enter an answer
-   let answer = prompt('Enter rock, paper of scissors', '');
+let choice = ['rock', 'paper', 'scissors'];
+//asking the player to enter an answer
+ let answer = prompt('Type rock, paper of scissors here')
 //making it case-insensitive
-    answer = answer.toLowerCase();
-//returning answer if the word typed is one of the three choices, else do nothing
-   if(answer == 'rock' || answer == 'paper' || answer =='scissors'){
+answer = answer.toLowerCase();
+//returning answer if the word typed is one of the three choices, else return
+if (answer == 'rock'  || answer == 'paper' || answer == 'scissors'){
 
-   return answer;
+    return answer;
+} else{
 
-   }
-
-   
-
+    console.log("Enter a valid answer")
+    return getPlayerChoice();
 }
-// initializing computer selection variable to store the computers choice and passing it onto the rockpaperscissors function
+}
+
+
+
+
+//playRound function that will tell you if you won or lose
+function playRound(){
+//initializing computer selection variable to store the computers choice
 const computerSelection = getComputerChoice();
-// initializing player selection variable to store the computers choice and passing it onto the rockpaperscissors function
-const playerSelection = getPlayerChoice();
-
-//rock paper scissors function that will tell you if you won or lose
-function determinedWinner(computerSelection, playerSelection){
-
-
-
-   //initializing result variable to store who won
-    let result;
+//initializing player selection variable to store the players choice
+const playerSelection = getPlayerChoice();   
+//initializing result variable to store who won
+let result;
 //writing an if then else containing every possible outcome and RETURNING THE VALUE
-if (playerSelection == 'scissors' && computerSelection == 'rock'){
-  result =  'You lose, rock beats scissors';
-} else if(playerSelection == 'rock' && computerSelection =='scissors'){
- result =  'You win, rock beats scissors';
-} else if(playerSelection == 'paper' && computerSelection =='rock'){
-    result = 'You win, paper beats rock';
-} else if(playerSelection == 'rock' && computerSelection =='paper'){
-    result =  'You lose, paper beats rock';
-} else if(playerSelection == 'scissors' && computerSelection =='paper'){
-    result =  'You win, scissors beats paper';
-} else if(playerSelection == 'paper' && computerSelection =='scissors'){
-    result =  'You lose, scissors beats paper';
-} else if(playerSelection === computerSelection ){
-    result =   'Its a tie';
+if (
+    (playerSelection === 'scissors' && computerSelection === 'rock') ||
+    (playerSelection === 'rock' && computerSelection === 'paper') ||
+    (playerSelection === 'paper' && computerSelection === 'scissors')
+  ) 
+  {
+    result = `You lose, ${computerSelection} beats ${playerSelection}`;
+    return ['computer', result];
+  } else if (
+    (playerSelection === 'rock' && computerSelection === 'scissors') ||
+    (playerSelection === 'paper' && computerSelection === 'rock') ||
+    (playerSelection === 'scissors' && computerSelection === 'paper')
+  ) {
+    result = `You win, ${playerSelection} beats ${computerSelection}`;
+    return ['player', result];
+  } else {
+    //return to playRound because draw is not allowed
+    return playRound();
+  }
 }
-//returning the result
-return result;
+//game function that will call playRound variable 5 times to play a bo5
+function game(){
+//initiate two variables that store if the computer or the player won
+let playerwon = 0;
+let computerwon = 0;
+//initialize the variable for the final result
+let finalWinner;
+//loop the function 5 times or just call it 5 times
+for(i = 0; i < 5; i ++){
+ 
+    const [winner, result] = playRound();
+
+//console log each result and add 1 to one of those two variables depending on who won
+    if( winner == 'computer')
+    {
+        computerwon++;
+    } else if(winner == 'player'){
+
+        playerwon++;
+    }
+    
+  console.log(result);
 }
 
+//if then else statement that tells you who won the bo5 and stores it into the final variable
 
-//storing the winner into a variable
-const winner = determinedWinner(computerSelection,playerSelection);
-//logging it into the console
-console.log(winner);
+if(computerwon >= 3 && playerwon < 3){
+
+    finalWinner = 'computer won the bo5';
+} else if(playerwon >=3 && computerwon < 3){
+
+    finalWinner = 'player won the bo5';
+}
+return finalWinner;
+}
+//run the game
+console.log(game());
     </script>
 
 </body>
