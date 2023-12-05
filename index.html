@@ -149,20 +149,21 @@ if (computerWins === 3 || playerWins === 3) {
 if(computerWins === 3){
 
 const computerWon = document.createElement('span');
+const startAgain = document.createElement('p');
 computerWon.textContent = `Computer won - Player: ${playerWins} / Computer: ${computerWins}`;
-startAgain.textContent = 'Start Again?'
+startAgain.textContent= 'Start Again?'
 resultContainer.appendChild(computerWon);
-resultContainer.appendChild(startAgain);
+resultContainer.appendChild(startAgain)
 resetGame();
 
-//comment
+
 } else if(playerWins === 3){
     const playerWon = document.createElement('span');
-    const startAgain = document.createElement('span');
+    const startAgain = document.createElement('p');
     playerWon.textContent = `Player won - Player: ${playerWins} / Computer: ${computerWins}`;
-    startAgain.textContent = 'Start Again?'
+    startAgain.textContent= 'Start Again?'
     resultContainer.appendChild(playerWon);
-    resultContainer.appendChild(startAgain);
+    resultContainer.appendChild(startAgain)
     resetGame();
 }
 } else{
