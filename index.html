@@ -6,7 +6,10 @@
     <title>Document</title>
 </head>
 <body>
+    <div></div>
+    <div id="resultContainer"></div>
     <script>
+
 
 
 // getting the computer choice
@@ -17,25 +20,9 @@ function getComputerChoice(){
     return choice[Math.floor(Math.random() * choice.length)];
 }
 //getting the player choice
-function getPlayerChoice(){
-//initializing choice array
-let choice = ['rock', 'paper', 'scissors'];
-//asking the player to enter an answer
- let answer = prompt('Type rock, paper of scissors here')
-//making it case-insensitive
-answer = answer.toLowerCase();
-//returning answer if the word typed is one of the three choices, else log an error and return to the function
-if (answer == 'rock'  || answer == 'paper' || answer == 'scissors'){
-
-    return answer;
-} else{
-
-    alert("Enter a valid answer")
-    return getPlayerChoice();
-}
-}
 
 
+let playerSelection;
 
 
 //playRound function that will tell you if you won or lost
@@ -43,7 +30,7 @@ function playRound(){
 //initializing computer selection variable to store the computers choice
 const computerSelection = getComputerChoice();
 //initializing player selection variable to store the players choice
-const playerSelection = getPlayerChoice();   
+  
 //initializing result variable to store who won
 let result;
 //writing an if then else containing every possible outcome and RETURNING THE VALUE
@@ -66,44 +53,122 @@ if (
     //return to playRound because draw is not allowed
     return playRound();
   }
-}
-//game function that will call playRound variable 5 times to play a bo5
-function game(){
-//initiate two variables that store if the computer or the player won
-let playerwon = 0;
-let computerwon = 0;
-//initialize the variable for the final result
-let finalWinner;
-//loop the function 5 times or just call it 5 times
-for(i = 0; i < 5; i ++){
  
-    const [winner, result] = playRound();
+}
 
-//console log each result and add 1 to one of those two variables depending on who won
-    if( winner == 'computer')
-    {
-        computerwon++;
-    } else if(winner == 'player'){
+const div = document.querySelector("div");
+const resultContainer = document.getElementById('resultContainer');
+resultContainer.style.display= "flex";
+resultContainer.style.flexDirection="column";
+resultContainer.style.gap="3px";
 
-        playerwon++;
+const button1 = document.createElement("button");
+const button2 = document.createElement("button");
+const button3 = document.createElement("button");
+
+button1.textContent ='Rock';
+button2.textContent = 'Paper';
+button3.textContent ='Scissors';
+
+div.appendChild(button1);
+div.appendChild(button2);
+div.appendChild(button3);
+
+div.style.display="flex";
+div.style.gap="10px";
+
+let playerWins = 0;
+let computerWins = 0;
+
+
+button1.addEventListener('click', function() {
+
+    playerSelection ="rock";
+    const rock =playRound();
+    const rockR = document.createElement('span');
+    resultContainer.appendChild(rockR);
+    const [winner, result] = rock;
+
+if( winner == 'computer')
+{
+    computerWins++;
+} else if(winner == 'player'){
+
+    playerWins++;
+}
+rockR.textContent = `${rock} - Player: ${playerWins} / Computer: ${computerWins}`;
+displayWinner();
+
     }
     
-  console.log(result);
+    );
+button2.addEventListener('click', function(){
+    
+    playerSelection ="paper";
+    const paper =playRound();
+    const paperR = document.createElement('span');
+    
+    resultContainer.appendChild(paperR);
+    const [winner, result] = paper;
+    if( winner == 'computer')
+    {
+        computerWins++;
+    } else if(winner == 'player'){
+
+        playerWins++;
+    }
+    paperR.textContent = `${paper} - Player: ${playerWins} / Computer: ${computerWins}`;
+    displayWinner();
+    
+    
+});
+button3.addEventListener('click', function(){
+
+    playerSelection="scissors";
+    
+    const scissors = playRound();
+    const scissorsR = document.createElement('span');
+    resultContainer.appendChild(scissorsR);
+    const [winner, result] = scissors;
+    if( winner == 'computer')
+    {
+    computerWins++;
+    } else if(winner == 'player'){
+
+    playerWins++;
+    }
+    scissorsR.textContent = `${scissors} - Player: ${playerWins} / Computer: ${computerWins}`;
+    displayWinner();
+    
+
+
+});
+
+function displayWinner(){
+if (computerWins === 3 || playerWins === 3) {
+if(computerWins === 3){
+
+const computerWon = document.createElement('span');
+computerWon.textContent = `Computer won - Player: ${playerWins} / Computer: ${computerWins}`;
+resultContainer.appendChild(computerWon);
+resetGame();
+
+
+} else if(playerWins === 3){
+    const playerWon = document.createElement('span');
+    playerWon.textContent = `Player won - Player: ${playerWins} / Computer: ${computerWins}`;
+    resultContainer.appendChild(playerWon);
+    resetGame();
 }
+} else{
 
-//if then else statement that tells you who won the bo5 and stores it into the final variable
 
-if(computerwon >= 3 && playerwon < 3){
-
-    finalWinner = 'computer won the bo5';
-} else if(playerwon >=3 && computerwon < 3){
-
-    finalWinner = 'player won the bo5';
 }
-return finalWinner;
 }
-//run the game
-console.log(game());
+function resetGame() {
+    playerWins = 0;
+    computerWins = 0;
+}
     </script>
 
 </body>
